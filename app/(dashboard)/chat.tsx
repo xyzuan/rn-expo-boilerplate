@@ -11,7 +11,7 @@ import { Text } from "@/components/ui/text";
 import { H4, P } from "@/components/ui/typography";
 import { View } from "react-native";
 
-const UserPage = () => {
+const ChatPage = () => {
   return (
     <View className="flex justify-center items-center h-full px-8">
       <Card className="w-full">
@@ -44,4 +44,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default ChatPage;

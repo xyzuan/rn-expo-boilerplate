@@ -30,4 +30,4 @@ const DARK_THEME: Theme = {
   colors: NAV_THEME.dark,
 };
 
-export { LIGHT_THEME, DARK_THEME };
+export { LIGHT_THEME, DARK_THEME, NAV_THEME };

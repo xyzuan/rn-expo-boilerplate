@@ -3,6 +3,8 @@ import "../global.css";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ThemeProvider as ReactThemeProvider } from "@react-navigation/native";
 import { SplashScreen } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { PortalHost } from "@rn-primitives/portal";
 import { Platform } from "react-native";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useEffect, useState } from "react";
@@ -20,7 +22,6 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     (async () => {
       const theme = await AsyncStorage.getItem("theme");
       if (Platform.OS === "web") {
-        // Adds the background color to the html element to prevent white background on overscroll.
         document.documentElement.classList.add("bg-background");
       }
       if (!theme) {
@@ -47,7 +48,9 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ReactThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+      <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
       {children}
+      <PortalHost />
     </ReactThemeProvider>
   );
 };
