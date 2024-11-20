@@ -9,12 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Info } from "@/components/ui/icons";
 import { View } from "react-native";
 import Animated, {
   FadeInUp,

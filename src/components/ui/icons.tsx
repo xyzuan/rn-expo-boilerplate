@@ -1,5 +1,4 @@
-import { iconCn } from "@/lib/utils";
-
+import { iconCn } from "@/commons/utils";
 import {
   Copy,
   HomeIcon,

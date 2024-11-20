@@ -1,8 +1,8 @@
+import { cn } from "@/commons/utils";
 import * as Slot from "@rn-primitives/slot";
 import { SlottableTextProps, TextRef } from "@rn-primitives/types";
 import * as React from "react";
 import { Platform, Text as RNText } from "react-native";
-import { cn } from "@/lib/utils";
 
 const H1 = React.forwardRef<TextRef, SlottableTextProps>(
   ({ className, asChild = false, ...props }, ref) => {

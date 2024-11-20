@@ -1,4 +1,4 @@
-import "../global.css";
+import "../../global.css";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ThemeProvider as ReactThemeProvider } from "@react-navigation/native";
@@ -6,10 +6,9 @@ import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { PortalHost } from "@rn-primitives/portal";
 import { Platform } from "react-native";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import { useEffect, useState } from "react";
-import { DARK_THEME, LIGHT_THEME } from "@/constants";
-
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { DARK_THEME, LIGHT_THEME } from "@/commons/constants";
 export { ErrorBoundary } from "expo-router";
 
 SplashScreen.preventAutoHideAsync();

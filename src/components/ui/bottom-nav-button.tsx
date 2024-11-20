@@ -41,7 +41,7 @@ const BottomNavButton: React.FC<TExpandBarTabButton> = ({
   setDimensions,
   ...props
 }) => {
-  const opacity = useSharedValue(0); // For fading in the label
+  const opacity = useSharedValue(0);
 
   useEffect(() => {
     opacity.value = withTiming(isFocused ? 1 : 0, { duration: 500 });
@@ -55,7 +55,7 @@ const BottomNavButton: React.FC<TExpandBarTabButton> = ({
   });
 
   const animatedContainer = useAnimatedStyle(() => {
-    const flexValue = withSpring(isFocused ? 2 : 1);
+    const flexValue = withSpring(isFocused ? 1.5 : 1);
 
     return {
       flex: flexValue,
@@ -71,7 +71,7 @@ const BottomNavButton: React.FC<TExpandBarTabButton> = ({
 
     return {
       color: textColor,
-      opacity: opacity.value, // Fade in effect
+      opacity: opacity.value,
     };
   });
 

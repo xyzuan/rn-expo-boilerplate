@@ -44,9 +44,11 @@ const BottomNav: React.FC<TTabBar> = ({
 
   return (
     <View
+      className="shadow-md px-1"
       style={[
         {
           ...styles.tabbar,
+          backgroundColor: primaryColor,
           bottom:
             Platform.OS === "ios"
               ? insets.bottom + sizes.insets.bottom.ios
@@ -101,8 +103,8 @@ const styles = StyleSheet.create({
   container: tabContainer,
   tabbar: {
     ...tabbar,
+    borderRadius: 999,
     justifyContent: "center",
-
     marginHorizontal: sizes.margin.horizontal,
     paddingVertical: sizes.padding.vertical,
   },

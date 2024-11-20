@@ -3,14 +3,12 @@ import {
   BookText,
   Coffee,
   HomeIcon,
-  Info,
   MessageCircle,
   Rss,
-  User,
 } from "@/components/ui/icons";
-import { NAV_THEME } from "@/constants";
-import { useColorScheme } from "@/hooks/useColorScheme";
 import BottomNav from "@/components/ui/bottom-nav";
+import { NAV_THEME } from "@/commons/constants";
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function DashboardLayout() {
   const { isDarkColorScheme } = useColorScheme();
