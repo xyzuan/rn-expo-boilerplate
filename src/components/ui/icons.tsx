@@ -10,6 +10,8 @@ import {
   Coffee,
   Rss,
   MessageCircle,
+  ChevronLeft,
+  MenuIcon,
 } from "lucide-react-native";
 
 iconCn(Copy);
@@ -22,6 +24,8 @@ iconCn(BookText);
 iconCn(Coffee);
 iconCn(Rss);
 iconCn(MessageCircle);
+iconCn(ChevronLeft);
+iconCn(MenuIcon);
 
 export {
   Copy,
@@ -34,4 +38,6 @@ export {
   Coffee,
   Rss,
   MessageCircle,
+  ChevronLeft,
+  MenuIcon,
 };

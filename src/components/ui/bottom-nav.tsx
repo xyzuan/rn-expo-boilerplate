@@ -44,11 +44,11 @@ const BottomNav: React.FC<TTabBar> = ({
 
   return (
     <View
-      className="shadow-md px-1"
+      className="shadow-md px-1 bg-background border border-primary/5"
       style={[
         {
           ...styles.tabbar,
-          backgroundColor: primaryColor,
+          // backgroundColor: primaryColor,
           bottom:
             Platform.OS === "ios"
               ? insets.bottom + sizes.insets.bottom.ios
