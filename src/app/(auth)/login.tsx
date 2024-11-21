@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { signInAtom } from "@/services/auth";
 import { router } from "expo-router";
 import { authAtom } from "@/atoms/auth.atom";
+import { toast } from "sonner-native";
 
 const LoginPage = () => {
   const [{ mutateAsync: login }] = useAtom(signInAtom);
@@ -21,14 +22,22 @@ const LoginPage = () => {
 
   const onSubmit = async (data: Record<string, string>) => {
     try {
-      await login({ email: data?.email, password: data?.password }).then(
-        async (res) => {
-          if (res?.status === "200") {
-            await updateAuth({ action: "signIn", value: res.token }).then(() =>
-              router.replace("/")
-            );
-          } else {
+      toast.promise(
+        login({ email: data?.email, password: data?.password }).then(
+          async (res) => {
+            if (res?.status === "200") {
+              await updateAuth({ action: "signIn", value: res.token }).then(
+                () => router.replace("/")
+              );
+            } else {
+              throw new Error(res ? res.message : "Error signing in");
+            }
           }
+        ),
+        {
+          loading: "Signing in...",
+          success: () => "Signed in successfully",
+          error: (error) => String(error),
         }
       );
     } catch (error) {

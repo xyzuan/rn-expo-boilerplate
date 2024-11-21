@@ -4,8 +4,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAtom } from "jotai";
 import { ThemeProvider as ReactThemeProvider } from "@react-navigation/native";
 import { SplashScreen as ExpoSplashScreen } from "expo-router";
+import { Toaster } from "sonner-native";
 import { StatusBar } from "expo-status-bar";
 import { PortalHost } from "@rn-primitives/portal";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Platform } from "react-native";
 import { useEffect, useState } from "react";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -59,11 +61,14 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ReactThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <QueryClientProvider client={queryClient}>
-        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-        {children}
-        <PortalHost />
-      </QueryClientProvider>
+      <GestureHandlerRootView className="flex-1">
+        <QueryClientProvider client={queryClient}>
+          <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+          {children}
+          <Toaster />
+          <PortalHost />
+        </QueryClientProvider>
+      </GestureHandlerRootView>
     </ReactThemeProvider>
   );
 };

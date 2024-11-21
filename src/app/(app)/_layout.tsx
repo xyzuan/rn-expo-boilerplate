@@ -22,6 +22,7 @@ export default function DashboardLayout() {
   return (
     <Tabs
       screenOptions={{
+        animation: "shift",
         headerShown: false,
       }}
       tabBar={(props) => (
