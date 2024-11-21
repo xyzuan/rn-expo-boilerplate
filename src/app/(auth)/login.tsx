@@ -1,17 +1,17 @@
 import { SafeAreaView, View } from "react-native";
-import { router } from "expo-router";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H1, P } from "@/components/ui/typography";
-import { useAuth } from "@/providers/auth-provider";
 import TextInputRHF from "@/components/rhf/text-input-rhf";
 import { useForm } from "react-hook-form";
 import { signInAtom } from "@/services/auth";
+import { router } from "expo-router";
+import { authAtom } from "@/hooks/useAtomAuth";
 
 const LoginPage = () => {
-  const { signIn } = useAuth();
-  const [{ mutate, status, data, error }] = useAtom(signInAtom);
+  const [{ mutateAsync: login }] = useAtom(signInAtom);
+  const [_, updateAuth] = useAtom(authAtom);
 
   const {
     control,
@@ -21,9 +21,17 @@ const LoginPage = () => {
 
   const onSubmit = async (data: Record<string, string>) => {
     try {
-      signIn();
-      // mutate({ email: data?.email, password: data?.password });
-      router.replace("/main");
+      await login({ email: data?.email, password: data?.password }).then(
+        async (res) => {
+          if (res?.status === "200") {
+            await updateAuth({ action: "signIn", value: res.token }).then(() =>
+              router.replace("/")
+            );
+          } else {
+            // console.log();
+          }
+        }
+      );
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +49,8 @@ const LoginPage = () => {
         <TextInputRHF
           className="mt-3"
           control={control}
-          name="Email"
+          label="Email Address"
+          name="email"
           rules={{
             required: "Email is required",
             pattern: {
@@ -50,7 +59,12 @@ const LoginPage = () => {
             },
           }}
         />
-        <TextInputRHF className="mt-3" control={control} name="Password" />
+        <TextInputRHF
+          className="mt-3"
+          control={control}
+          label="Password"
+          name="password"
+        />
         <Button
           className="mt-6"
           disabled={!isValid}
@@ -58,10 +72,6 @@ const LoginPage = () => {
         >
           <Text>Sign to Your Account</Text>
         </Button>
-        <Text>{status}</Text>
-        <Text>{data?.setCookie}</Text>
-        <Text>{error?.toString()}</Text>
-        {/* <Text>{data.toString()}</Text> */}
       </View>
     </SafeAreaView>
   );

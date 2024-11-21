@@ -1,4 +1,5 @@
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
+import { useAtom } from "jotai";
 import {
   BookText,
   Coffee,
@@ -10,9 +11,13 @@ import {
 import BottomNav from "@/components/ui/bottom-nav";
 import { NAV_THEME } from "@/commons/constants";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { authAtom } from "@/hooks/useAtomAuth";
 
 export default function DashboardLayout() {
   const { isDarkColorScheme } = useColorScheme();
+  const [{ session, isLoading }] = useAtom(authAtom);
+
+  if (!session && !isLoading) return <Redirect href={"/login"} />;
 
   return (
     <Tabs
@@ -32,7 +37,7 @@ export default function DashboardLayout() {
       )}
     >
       <Tabs.Screen
-        name="main"
+        name="index"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => <HomeIcon size={18} color={color} />,

@@ -16,9 +16,9 @@ const blogBySlug = (slug: string) =>
   useQuery({
     queryKey: ["blog", slug],
     queryFn: async (): Promise<BlogItem> => {
-      const res = await fetch(`https://api.xyzuan.my.id/v2/blog/${slug}`).then(
-        (res) => res.json()
-      );
+      const res = await fetch(
+        `https://api-dev.xyzuan.my.id/v2/blog/${slug}`
+      ).then((res) => res.json());
       return res.data;
     },
   });

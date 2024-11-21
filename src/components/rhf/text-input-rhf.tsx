@@ -7,11 +7,13 @@ import { View } from "react-native";
 const TextInputRHF = ({
   control,
   name,
+  label,
   className,
   rules,
   ...props
 }: {
   control: Control;
+  label: string;
   name: string;
   className?: string;
   rules?: RegisterOptions;
@@ -23,7 +25,7 @@ const TextInputRHF = ({
       rules={rules}
       render={({ field: { onChange, value, onBlur } }) => (
         <View className={cn("w-full", className)}>
-          <Label nativeID={name}>{name}</Label>
+          <Label nativeID={name}>{label}</Label>
           <Input
             className="mt-3"
             value={value}

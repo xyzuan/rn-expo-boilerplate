@@ -1,3 +1,4 @@
+import { LoginResponse } from "@/commons/types/auth";
 import { atomWithMutation } from "jotai-tanstack-query";
 
 const signInAtom = atomWithMutation(() => ({
@@ -8,7 +9,7 @@ const signInAtom = atomWithMutation(() => ({
   }: {
     email: string;
     password: string;
-  }) => {
+  }): Promise<LoginResponse> => {
     const res = await fetch(`https://api-dev.xyzuan.my.id/v2/auth/login`, {
       method: "POST",
       body: JSON.stringify({
@@ -18,15 +19,8 @@ const signInAtom = atomWithMutation(() => ({
       headers: {
         "Content-Type": "application/json",
       },
-    });
-
-    const setCookie = res.headers.get("set-cookie");
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(`Error: ${res.status} ${res.body}`);
-    }
-    return { setCookie, data };
+    }).then((res) => res.json());
+    return res;
   },
 }));
 

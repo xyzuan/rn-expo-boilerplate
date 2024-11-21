@@ -1,3 +1,4 @@
+import { useAtom } from "jotai";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,12 +10,23 @@ import {
 } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import { H4, P } from "@/components/ui/typography";
-import { useAuth } from "@/providers/auth-provider";
+import { authAtom } from "@/hooks/useAtomAuth";
 import { router } from "expo-router";
 import { View } from "react-native";
 
 const ProfilePage = () => {
-  const { signOut } = useAuth();
+  const [_, updateAuth] = useAtom(authAtom);
+
+  const handleLogout = async () => {
+    try {
+      await updateAuth({ action: "signOut" }).then(() =>
+        router.replace("/login")
+      );
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   return (
     <View className="flex justify-center items-center h-full px-8">
       <Card className="w-full">
@@ -44,10 +56,7 @@ const ProfilePage = () => {
           <Button
             variant="outline"
             className="w-full"
-            onPress={() => {
-              signOut();
-              router.replace("/");
-            }}
+            onPress={() => handleLogout()}
           >
             <Text>Log Out</Text>
           </Button>
