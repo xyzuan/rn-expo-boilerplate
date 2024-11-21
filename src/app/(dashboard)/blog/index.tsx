@@ -12,11 +12,13 @@ const BlogPage = () => {
       rememberTabScrollPosition
       tabsContainerBackgroundColor={"#000"}
       backgroundColor={"#000"}
-      tabsContainerStyle={{ paddingBottom: 18 }}
+      tabsContainerStyle={{
+        marginBottom: 18,
+      }}
       tabTextActiveStyle={{ color: "#000" }}
       tabTextContainerActiveStyle={{ backgroundColor: "#fff" }}
       parallaxHeight={320}
-      headerHeight={90}
+      headerHeight={70}
       title={"My blogs, \nReady for a quiz?"}
       tabs={[
         { title: "Web" },
@@ -26,7 +28,7 @@ const BlogPage = () => {
       ]}
       showsVerticalScrollIndicator={false}
     >
-      <ScrollView className="bg-primary-foreground rounded-t-3xl">
+      <ScrollView className="bg-background rounded-t-3xl">
         {isPending && <Text>Loading...</Text>}
         {data && (
           <View className="flex flex-col gap-3 pb-24 p-6">

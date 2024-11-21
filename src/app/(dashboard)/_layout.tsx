@@ -5,6 +5,7 @@ import {
   HomeIcon,
   MessageCircle,
   Rss,
+  User,
 } from "@/components/ui/icons";
 import BottomNav from "@/components/ui/bottom-nav";
 import { NAV_THEME } from "@/commons/constants";
@@ -31,7 +32,7 @@ export default function DashboardLayout() {
       )}
     >
       <Tabs.Screen
-        name="index"
+        name="main"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => <HomeIcon size={18} color={color} />,
@@ -63,6 +64,13 @@ export default function DashboardLayout() {
         options={{
           title: "Chat",
           tabBarIcon: ({ color }) => <MessageCircle size={18} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => <User size={18} color={color} />,
         }}
       />
     </Tabs>

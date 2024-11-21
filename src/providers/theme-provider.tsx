@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { DARK_THEME, LIGHT_THEME } from "@/commons/constants";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "./auth-provider";
 export { ErrorBoundary } from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
@@ -49,11 +50,13 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ReactThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <QueryClientProvider client={queryClient}>
-        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-        {children}
-        <PortalHost />
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+          {children}
+          <PortalHost />
+        </QueryClientProvider>
+      </AuthProvider>
     </ReactThemeProvider>
   );
 };

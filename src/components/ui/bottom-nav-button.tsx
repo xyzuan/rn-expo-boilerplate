@@ -48,14 +48,14 @@ const BottomNavButton: React.FC<TExpandBarTabButton> = ({
   }, [isFocused, opacity]);
 
   const animatedHighlightContainer = useAnimatedStyle(() => {
-    const animatedWidth = withSpring(isFocused ? dimensions.width - 10 : 0);
+    const animatedWidth = withSpring(isFocused ? dimensions.width - 10 : 0, {});
     return {
       width: animatedWidth,
     };
   });
 
   const animatedContainer = useAnimatedStyle(() => {
-    const flexValue = withSpring(isFocused ? 1.5 : 1);
+    const flexValue = withSpring(isFocused ? 2 : 1, {});
 
     return {
       flex: flexValue,

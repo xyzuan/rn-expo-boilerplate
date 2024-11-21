@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import { View } from "react-native";
 
 const BlogLayout = () => {
   return (
@@ -10,8 +11,10 @@ const BlogLayout = () => {
       <Stack.Screen
         name="index"
         options={{
-          headerShown: false,
-          title: "Blog",
+          headerShadowVisible: false,
+          header: () => <View className="h-12 bg-black" />,
+          headerShown: true,
+          title: "",
         }}
       />
       <Stack.Screen
