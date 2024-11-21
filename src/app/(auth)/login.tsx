@@ -7,7 +7,7 @@ import TextInputRHF from "@/components/rhf/text-input-rhf";
 import { useForm } from "react-hook-form";
 import { signInAtom } from "@/services/auth";
 import { router } from "expo-router";
-import { authAtom } from "@/hooks/useAtomAuth";
+import { authAtom } from "@/atoms/auth.atom";
 
 const LoginPage = () => {
   const [{ mutateAsync: login }] = useAtom(signInAtom);
@@ -28,7 +28,6 @@ const LoginPage = () => {
               router.replace("/")
             );
           } else {
-            // console.log();
           }
         }
       );

@@ -1,8 +1,9 @@
 import "../../global.css";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAtom } from "jotai";
 import { ThemeProvider as ReactThemeProvider } from "@react-navigation/native";
-import { SplashScreen } from "expo-router";
+import { SplashScreen as ExpoSplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { PortalHost } from "@rn-primitives/portal";
 import { Platform } from "react-native";
@@ -11,13 +12,20 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { DARK_THEME, LIGHT_THEME } from "@/commons/constants";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export { ErrorBoundary } from "expo-router";
+import { authAtom } from "@/atoms/auth.atom";
 
-SplashScreen.preventAutoHideAsync();
+ExpoSplashScreen.preventAutoHideAsync();
 
-const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = useState(false);
+  const [{ isSessionReady }, updateAuth] = useAtom(authAtom);
   const queryClient = new QueryClient();
+
+  useEffect(() => {
+    const initSession = async () => updateAuth({ action: "refresh" });
+    initSession();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -39,13 +47,15 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       }
       setIsColorSchemeLoaded(true);
     })().finally(() => {
-      SplashScreen.hideAsync();
+      ExpoSplashScreen.hideAsync();
     });
   }, []);
 
   if (!isColorSchemeLoaded) {
     return null;
   }
+
+  if (!isSessionReady) return null;
 
   return (
     <ReactThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
@@ -58,4 +68,4 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default ThemeProvider;
+export default AppProvider;

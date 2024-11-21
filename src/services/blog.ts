@@ -1,6 +1,6 @@
 import { BlogItem } from "@/commons/types/blog";
-import { atomWithQuery } from "jotai-tanstack-query";
 import { useQuery } from "@tanstack/react-query";
+import { atomWithQuery } from "jotai-tanstack-query";
 
 const blogAtom = atomWithQuery((get) => ({
   queryKey: ["blog"],

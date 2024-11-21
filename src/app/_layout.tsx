@@ -1,14 +1,14 @@
-import ThemeProvider from "@/providers/theme-provider";
 import { Stack } from "expo-router";
+import AppProvider from "@/providers/app-provider";
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
+    <AppProvider>
       <Stack
         screenOptions={{
           headerShown: false,
         }}
       />
-    </ThemeProvider>
+    </AppProvider>
   );
 }

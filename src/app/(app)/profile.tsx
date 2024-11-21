@@ -10,11 +10,13 @@ import {
 } from "@/components/ui/card";
 import { Text } from "@/components/ui/text";
 import { H4, P } from "@/components/ui/typography";
-import { authAtom } from "@/hooks/useAtomAuth";
 import { router } from "expo-router";
 import { View } from "react-native";
+import { myProfileAtom } from "@/services/profile";
+import { authAtom } from "@/atoms/auth.atom";
 
 const ProfilePage = () => {
+  const [{ data }] = useAtom(myProfileAtom);
   const [_, updateAuth] = useAtom(authAtom);
 
   const handleLogout = async () => {
@@ -45,7 +47,7 @@ const ProfilePage = () => {
             </AvatarFallback>
           </Avatar>
           <View>
-            <H4>Jody Yuantoro</H4>
+            <H4>{data?.name}</H4>
             <P>Software Engineer</P>
           </View>
         </CardContent>
